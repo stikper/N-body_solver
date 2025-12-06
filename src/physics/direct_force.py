@@ -22,7 +22,7 @@ class DirectForceCalculator(ForceCalculator):
             for j in range(data.n_particles):
                 if i == j:
                     continue
-                l = (data.positions[j] - data.positions[i]).magnitude
+                l = np.linalg.norm((data.positions[j] - data.positions[i]))
                 u += -G * data.masses[i] * data.masses[j] / l
         u /= 2
         return u
