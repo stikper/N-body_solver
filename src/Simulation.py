@@ -1,4 +1,3 @@
-from ParticleSystem import *
 from ForceCalculator import *
 from Integrator import *
 

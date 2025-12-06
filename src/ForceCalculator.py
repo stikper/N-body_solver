@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from ParticleSystem import ParticleData
+from ParticleData import *
 from constants import *
 import numpy as np
 
