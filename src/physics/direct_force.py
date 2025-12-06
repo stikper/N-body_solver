@@ -1,17 +1,7 @@
-from abc import ABC, abstractmethod
-from ParticleData import *
-from constants import *
 import numpy as np
 
-
-class ForceCalculator(ABC):
-    @abstractmethod
-    def calc_force(self, data: ParticleData):
-        pass
-
-    @abstractmethod
-    def calc_potential_energy(self, data: ParticleData):
-        pass
+from src.core import ParticleData, G
+from .force_calculator import ForceCalculator
 
 
 class DirectForceCalculator(ForceCalculator):

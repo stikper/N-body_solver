@@ -1,22 +1,13 @@
-from abc import ABC, abstractmethod
-from src.ParticleSystem import ParticleSystem
+from typing import TYPE_CHECKING
 
+from .base import Integrator
 
-class Integrator(ABC):
-    @abstractmethod
-    def step(self, system: ParticleSystem, dt: float) -> ParticleSystem:
-        pass
-
-class ExplicitEulerIntegrator(Integrator):
-    def step(self, system: ParticleSystem, dt: float):
-        system.data.positions = system.data.positions + system.data.velocities * dt
-        system.data.velocities = system.data.velocities + system.data.forces / system.data.masses * dt
-        system.calc_forces()
-        return system
+if TYPE_CHECKING:
+    from src.simulation import ParticleSystem
 
 
 class RK4Integrator(Integrator):
-    def step(self, system: ParticleSystem, dt: float):
+    def step(self, system: 'ParticleSystem', dt: float):
         # t0
         pos0 = system.data.positions.copy()
         vel0 = system.data.velocities.copy()

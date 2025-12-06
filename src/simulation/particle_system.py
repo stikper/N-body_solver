@@ -1,5 +1,5 @@
-from ParticleData import *
-from ForceCalculator import ForceCalculator
+from src.core import ParticleData
+from src.physics import ForceCalculator
 
 
 class ParticleSystem:

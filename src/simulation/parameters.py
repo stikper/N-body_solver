@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from ForceCalculator import ForceCalculator
-from Integrator import Integrator
+from src.physics import ForceCalculator
+from src.integrators import Integrator
 
 @dataclass
 class SimulationParameters:

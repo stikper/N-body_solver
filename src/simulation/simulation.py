@@ -1,6 +1,6 @@
-from SimulationParameters import SimulationParameters
-from ParticleData import ParticleData
-from ParticleSystem import ParticleSystem
+from src.core import ParticleData
+from .particle_system import ParticleSystem
+from .parameters import SimulationParameters
 
 class Simulation:
     def __init__(self, data: ParticleData, sim_params: SimulationParameters):
