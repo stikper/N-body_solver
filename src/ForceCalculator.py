@@ -23,7 +23,7 @@ class DirectForceCalculator(ForceCalculator):
                 if i == j:
                     continue
                 r = data.positions[j] - data.positions[i]
-                forces[i] += (G * data.masses[i] * data.masses[j] / r.magnitude ** 3) * r
+                forces[i] += (G * data.masses[i] * data.masses[j] / np.linalg.norm(r) ** 3) * r
         return forces
 
     def calc_potential_energy(self, data: ParticleData) -> float:
