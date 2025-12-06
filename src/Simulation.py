@@ -1,11 +1,6 @@
-from ForceCalculator import *
-from Integrator import *
-
-@dataclass
-class SimulationParameters:
-    force_calculator: ForceCalculator
-    integrator: Integrator
-    dt: float
+from SimulationParameters import SimulationParameters
+from ParticleData import ParticleData
+from ParticleSystem import ParticleSystem
 
 class Simulation:
     def __init__(self, data: ParticleData, sim_params: SimulationParameters):
