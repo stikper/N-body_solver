@@ -5,10 +5,18 @@ from .core import ParticleData, G, AU
 from .physics import ForceCalculator, DirectForceCalculator
 
 # Integrators
-from .integrators import Integrator, ExplicitEulerIntegrator, RK4Integrator
+from .integrators import Integrator, ExplicitEulerIntegrator, RK4Integrator, LFIntegrator
 
 # Simulation
 from .simulation import ParticleSystem, Simulation, SimulationParameters
+
+# Visualization
+from .visualization import (
+    Visualizer,
+    Animator2D,
+    Plotter2D,
+    EnergyPlotter,
+)
 
 __all__ = [
     # Core
@@ -24,9 +32,13 @@ __all__ = [
     'Integrator',
     'ExplicitEulerIntegrator',
     'RK4Integrator',
+    'LFIntegrator',
 
     # Simulation
     'ParticleSystem',
     'Simulation',
     'SimulationParameters',
+
+    # Visualization
+    'Visualizer', 'Animator2D', 'Plotter2D', 'EnergyPlotter',
 ]
