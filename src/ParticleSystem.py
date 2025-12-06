@@ -47,6 +47,9 @@ class ParticleSystem:
         self.data = data
         self.force_calculator = force_calculator
 
+    def copy(self):
+        return ParticleSystem(data=self.data.copy(), force_calculator=self.force_calculator)
+
     def calc_forces(self):
         forces = self.force_calculator.calc_force(self.data)
         self.data.forces = forces
