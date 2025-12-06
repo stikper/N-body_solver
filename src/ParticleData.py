@@ -13,8 +13,8 @@ class ParticleData:
         # Data validation
         n = len(self.masses)
 
-        if self.masses.shape != (n,):
-            raise ValueError("masses must have shape (n,)")
+        if self.masses.shape != (n, 1):
+            raise ValueError("masses must have shape (n, 1)")
 
         if self.positions.shape != (n, 3):
             raise ValueError("position must have shape (n, 3)")
@@ -23,7 +23,7 @@ class ParticleData:
             raise ValueError("velocity must have shape (n, 3)")
 
         if self.forces is None:
-            self.forces = np.zeros(n, 3)
+            self.forces = np.zeros((n,3))
         elif self.forces.shape != (n, 3):
             raise ValueError("force must have shape (n, 3)")
 
