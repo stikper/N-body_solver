@@ -17,19 +17,39 @@ class ExplicitEulerIntegrator(Integrator):
 
 class RK4Integrator(Integrator):
     def step(self, system: ParticleSystem, dt: float):
-        explicit_integrator = ExplicitEulerIntegrator()
-        k1 = system.copy()
-        k2 = explicit_integrator.step(k1.copy(), dt / 2)
-        k3 = explicit_integrator.step(k2.copy(), dt / 2)
-        k4 = explicit_integrator.step(k3.copy(), dt)
+        # t0
+        pos0 = system.data.positions.copy()
+        vel0 = system.data.velocities.copy()
 
-        # return y + dt / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
-        system.data.positions = (system.data.positions +
-                                 dt / 6 * (k1.data.velocities + 2 * k2.data.velocities +
-                                           2 * k3.data.velocities + k4.data.velocities))
-        system.data.velocities = (system.data.velocities + dt / 6 * (k1.data.forces / k1.data.masses +
-                                                                     2 * k2.data.forces / k2.data.masses +
-                                                                     2 * k3.data.forces / k3.data.masses +
-                                                                     k4.data.forces / k4.data.masses))
+        # k1
         system.calc_forces()
+        k1_v = system.data.forces / system.data.masses
+        k1_x = system.data.velocities.copy()
+
+        # k2
+        system.data.positions = pos0 + k1_x * (dt / 2)
+        system.data.velocities = vel0 + k1_v * (dt / 2)
+        system.calc_forces()
+        k2_v = system.data.forces / system.data.masses
+        k2_x = system.data.velocities.copy()
+
+        # k3
+        system.data.positions = pos0 + k2_x * (dt / 2)
+        system.data.velocities = vel0 + k2_v * (dt / 2)
+        system.calc_forces()
+        k3_v = system.data.forces / system.data.masses
+        k3_x = system.data.velocities.copy()
+
+        # k4
+        system.data.positions = pos0 + k3_x * dt
+        system.data.velocities = vel0 + k3_v * dt
+        system.calc_forces()
+        k4_v = system.data.forces / system.data.masses
+        k4_x = system.data.velocities.copy()
+
+        # Final update
+        system.data.positions = pos0 + dt / 6 * (k1_x + 2 * k2_x + 2 * k3_x + k4_x)
+        system.data.velocities = vel0 + dt / 6 * (k1_v + 2 * k2_v + 2 * k3_v + k4_v)
+        system.calc_forces()
+
         return system
