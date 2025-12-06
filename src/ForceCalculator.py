@@ -6,16 +6,16 @@ import numpy as np
 
 class ForceCalculator(ABC):
     @abstractmethod
-    def compute_force(self, data: ParticleData):
+    def calc_force(self, data: ParticleData):
         pass
 
     @abstractmethod
-    def compute_potential_energy(self, data: ParticleData):
+    def calc_potential_energy(self, data: ParticleData):
         pass
 
 
 class DirectForceCalculator(ForceCalculator):
-    def compute_force(self, data: ParticleData) -> np.ndarray:
+    def calc_force(self, data: ParticleData) -> np.ndarray:
         forces = np.zeros_like(data.forces)
         for i in range(data.n_particles):
             forces[i] = np.zeros(3)
@@ -26,7 +26,7 @@ class DirectForceCalculator(ForceCalculator):
                 forces[i] += (G * data.masses[i] * data.masses[j] / r.magnitude ** 3) * r
         return forces
 
-    def compute_potential_energy(self, data: ParticleData) -> float:
+    def calc_potential_energy(self, data: ParticleData) -> float:
         u: float = 0.0
         for i in range(data.n_particles):
             for j in range(data.n_particles):
