@@ -1,3 +1,5 @@
+import numpy as np
+
 from src.core import ParticleData
 from src.physics import ForceCalculator
 
@@ -18,7 +20,7 @@ class ParticleSystem:
     def calc_kinetic_energy(self):
         keenetic_energy = 0.0
         for i in range(self.data.n_particles):
-            keenetic_energy += self.data.masses[i] * self.data.velocities[i]**2 / 2.0
+            keenetic_energy += self.data.masses[i] * np.linalg.norm(self.data.velocities[i])**2 / 2.0
         return keenetic_energy
 
     def calc_potential_energy(self):
