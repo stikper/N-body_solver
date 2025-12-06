@@ -21,11 +21,11 @@ class ParticleSystem:
         keenetic_energy = 0.0
         for i in range(self.data.n_particles):
             keenetic_energy += self.data.masses[i] * np.linalg.norm(self.data.velocities[i])**2 / 2.0
-        return keenetic_energy
+        return float(keenetic_energy)
 
     def calc_potential_energy(self) -> float:
         potential_energy = self.force_calculator.calc_potential_energy(self.data)
-        return potential_energy
+        return float(potential_energy)
 
     def calc_total_energy(self) -> float:
         potential_energy = self.calc_potential_energy()
