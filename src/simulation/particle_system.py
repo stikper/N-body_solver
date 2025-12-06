@@ -15,7 +15,7 @@ class ParticleSystem:
         self.data.forces = forces
         return forces
 
-    def calc_keenetic_energy(self):
+    def calc_kinetic_energy(self):
         keenetic_energy = 0.0
         for i in range(self.data.n_particles):
             keenetic_energy += self.data.masses[i] * self.data.velocities[i]**2 / 2.0
@@ -27,6 +27,6 @@ class ParticleSystem:
 
     def calc_total_energy(self):
         potential_energy = self.calc_potential_energy()
-        keenetic_energy = self.calc_keenetic_energy()
+        keenetic_energy = self.calc_kinetic_energy()
         return potential_energy + keenetic_energy
 
